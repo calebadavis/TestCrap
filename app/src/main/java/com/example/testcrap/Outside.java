@@ -8,7 +8,7 @@ public class Outside implements Environment {
     @Override
     public void setTemperature(int temp) { outsideTemp = temp; }
 
-    public class Inside implements Environment {
+    public static class Inside implements Environment {
 
         @Override
         public int getTemperature() { return insideTemp; }
