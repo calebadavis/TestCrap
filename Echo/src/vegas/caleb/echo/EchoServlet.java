@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -75,11 +76,21 @@ public class EchoServlet extends HttpServlet {
 		System.out.println("Body: " + body);
 		JSONObject responseJSON = new JSONObject();
 		JSONObject routineConfig = new JSONObject();
+		
+		ServletContext appContext = getServletContext();
+		Integer
+			hours=(Integer)appContext.getAttribute("hours"),
+			minutesOn=(Integer)appContext.getAttribute("minutesOn"),
+			minutesOff=(Integer)appContext.getAttribute("minutesOff"),
+			pressure=(Integer)appContext.getAttribute("pressure"),
+			startDelay=(Integer)appContext.getAttribute("startDelay");
+		
 		try {
-			routineConfig.put("hours", 10);
-			routineConfig.put("minutesOn", 25);
-			routineConfig.put("minutesOff", 5);
-			routineConfig.put("pressure", 30);
+			routineConfig.put("hours", hours);
+			routineConfig.put("minutesOn", minutesOn);
+			routineConfig.put("minutesOff", minutesOff);
+			routineConfig.put("pressure", pressure);
+			routineConfig.put("startDelay", startDelay);
 			responseJSON.put("success", true);
 			responseJSON.put("routineConfig", routineConfig);
 		} catch (JSONException je) {
